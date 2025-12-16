@@ -1,6 +1,17 @@
 require("mason").setup()
 require("fidget").setup({})
 require("conform").setup({ formatters_by_ft = {} })
+
+require("mason-lspconfig").setup({
+    ensure_installed = {'lua_ls',
+    'ts_ls',
+    'pyright',
+    'tailwindcss',
+    'cssls', 
+    'clangd'
+    }
+})
+
 local cmp = require('cmp')
 local cmp_lsp = require("cmp_nvim_lsp")
 local capabilities = vim.tbl_deep_extend(
@@ -135,11 +146,27 @@ vim.lsp.config("pyright", {
 	settings = {
 		pyright = {
 			disableOrganizeImports = false,
-			disableCodeActions = false,
+            disableCodeActions = false,
 		},
 	},
 })
 vim.lsp.enable("pyright")
+
+
+vim.lsp.config["clangd"] = {
+  capabilities = capabilities,
+  cmd = { "clangd", "--background-index", "--clang-tidy", "--completion-style=detailed" },
+  filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
+  root_markers = {
+    "compile_commands.json",
+    "compile_flags.txt",
+    ".git",
+    "CMakeLists.txt",
+  },
+}
+
+vim.lsp.enable("clangd")
+
 
 vim.diagnostic.config({
 			float = {
