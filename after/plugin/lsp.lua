@@ -1,6 +1,17 @@
 require("mason").setup()
 require("fidget").setup({})
-require("conform").setup({ formatters_by_ft = {} })
+require("conform").setup({
+  formatters_by_ft = {
+    lua = { "stylua" },
+    -- Conform will run multiple formatters sequentially
+    python = { "isort", "black" },
+    -- You can customize some of the format options for the filetype (:help conform.format)
+    rust = { "rustfmt", lsp_format = "fallback" },
+    -- Conform will run the first available formatter
+    javascript = { "prettierd", "prettier", stop_after_first = true },
+  },
+})
+
 
 require("mason-lspconfig").setup({
     ensure_installed = {'lua_ls',
@@ -11,6 +22,15 @@ require("mason-lspconfig").setup({
     'clangd',
 	'emmet_ls',
     }
+})
+
+require("mason-nvim-dap").setup({
+    ensure_installed = { "python" },
+    handlers = {
+        function(config)
+          require('mason-nvim-dap').default_setup(config)
+        end,
+    },
 })
 
 local cmp = require('cmp')
@@ -200,6 +220,12 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*",
+  callback = function(args)
+    require("conform").format({ bufnr = args.buf })
+  end,
+})
 
 vim.diagnostic.config({
 			float = {
