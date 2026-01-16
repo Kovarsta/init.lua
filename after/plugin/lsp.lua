@@ -24,7 +24,6 @@ require("mason-lspconfig").setup({
     }
 })
 
-require("dap-python").setup("python3")
 
 require("mason-nvim-dap").setup({
     ensure_installed = { "python" },
@@ -36,6 +35,10 @@ require("mason-nvim-dap").setup({
 	},
 })
 
+local is_windows = vim.fn.has "win32" == 1
+local mason_root = vim.fn.stdpath "data" .. "/mason/packages/"
+local tail = not is_windows and "debugpy/venv/bin/python" or "debugpy/venv/scripts/python.exe"
+require("dap-python").setup(mason_root .. tail)
 
 local cmp = require('cmp')
 local cmp_lsp = require("cmp_nvim_lsp")
