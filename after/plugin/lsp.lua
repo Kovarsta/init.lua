@@ -24,14 +24,18 @@ require("mason-lspconfig").setup({
     }
 })
 
+require("dap-python").setup("python3")
+
 require("mason-nvim-dap").setup({
     ensure_installed = { "python" },
-    handlers = {
+	automatic_installation = true,
+	handlers = {
         function(config)
           require('mason-nvim-dap').default_setup(config)
         end,
-    },
+	},
 })
+
 
 local cmp = require('cmp')
 local cmp_lsp = require("cmp_nvim_lsp")
