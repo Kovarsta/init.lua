@@ -1,4 +1,4 @@
-require('nvim-autopairs').setup({
-    event = "InsertEnter",
-    config = true,
+require("nvim-autopairs").setup({
+	event = "InsertEnter",
+	config = true,
 })
