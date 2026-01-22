@@ -30,7 +30,7 @@ require("mason-lspconfig").setup({
 })
 
 require("mason-nvim-dap").setup({
-	ensure_installed = { "python" },
+	ensure_installed = { "python", "cppdbg" },
 	automatic_installation = true,
 	handlers = {
 		function(config)
