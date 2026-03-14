@@ -1,3 +1,0 @@
-return { 
-    "LuxVim/nvim-luxmotion",
-}
