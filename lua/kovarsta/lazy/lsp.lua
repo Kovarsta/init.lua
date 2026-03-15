@@ -51,6 +51,7 @@ return {
         require("mason").setup()
         require("mason-lspconfig").setup({
             ensure_installed = {
+				"harper_ls",
                 "lua_ls",
                 "rust_analyzer",
                 "ts_ls",
@@ -122,6 +123,10 @@ return {
                         filetypes = { "html", "css", "scss", "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "heex" },
                     })
                 end,
+				
+				["harper-ls"] = function()
+					local harper = require('lspconfig').harper_ls.setup{}
+				end,
             }
         })
 

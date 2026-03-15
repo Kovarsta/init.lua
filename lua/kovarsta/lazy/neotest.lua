@@ -11,9 +11,11 @@ return {
     config = function()
         require("neotest").setup({
             adapters = {
+				--[[
                 require("neotest-golang")({
                     dap = { justMyCode = false },
                 }),
+				--]]
             },
         })
 
