@@ -67,7 +67,6 @@ return {
 				"rust_analyzer",
 				"ts_ls",
 				"tailwindcss",
-				"ts_ls",
 				"pyright",
 				"cssls",
 				"clangd",
@@ -146,7 +145,7 @@ return {
 				end,
 
 				["harper-ls"] = function()
-					local harper = require("lspconfig").harper_ls.setup({})
+					require("lspconfig").harper_ls.setup({})
 				end,
 			},
 		})

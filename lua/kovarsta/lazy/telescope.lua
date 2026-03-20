@@ -8,7 +8,15 @@ return {
     },
 
     config = function()
-        require('telescope').setup({})
+        require('telescope').setup({
+			defaults = {
+                file_ignore_patterns = {
+					-- Experimental, remove if wonky
+                    "node_modules\\",
+                    ".git\\" -- Added this to ignore the git folder on Windows too
+                },
+            }
+		})
 
         local builtin = require('telescope.builtin')
         vim.keymap.set('n', '<leader>pf', builtin.find_files, {})
