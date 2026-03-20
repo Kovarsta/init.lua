@@ -2,7 +2,9 @@ require("kovarsta.set")
 require("kovarsta.remap")
 require("kovarsta.lazy_init")
 
-vim.g.loaded_python3_provider = 0
+--vim.g.loaded_python3_provider = 0
+
+vim.opt.guicursor = "n-v-c-i:block"
 
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})

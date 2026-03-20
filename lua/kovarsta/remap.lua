@@ -121,6 +121,9 @@ vim.keymap.set("n", "<leader>bo", "<cmd>BufferLineCloseOthers<cr>", { desc = "Cl
 -- This shows letters on the tabs to jump directly to them
 vim.keymap.set("n", "<leader>bp", "<cmd>BufferLinePick<cr>", { desc = "Pick Buffer" })
 
+-- Buffer pin
+vim.keymap.set("n", "<leader>bp", "<cmd>BufferLineTogglePin<cr>", { desc = "Toggle Pin" })
+
 ---------------
 -- SPLITTING --
 ---------------
@@ -141,3 +144,4 @@ vim.keymap.set("n", "<C-Up>", "<cmd>resize +2<CR>")
 vim.keymap.set("n", "<C-Down>", "<cmd>resize -2<CR>")
 vim.keymap.set("n", "<C-Left>", "<cmd>vertical resize -2<CR>")
 vim.keymap.set("n", "<C-Right>", "<cmd>vertical resize +2<CR>")
+
