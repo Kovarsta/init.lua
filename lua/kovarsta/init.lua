@@ -4,6 +4,15 @@ require("kovarsta.lazy_init")
 
 vim.g.loaded_python3_provider = 0
 
+if vim.fn.has("win32") == 1 then
+    vim.opt.shell = "powershell.exe"
+    vim.opt.shellcmdflag = "-NoLogo -ExecutionPolicy RemoteSigned -Command [Console]::InputEncoding=[Console]::OutputEncoding=[System.Text.Encoding]::UTF8;"
+    vim.opt.shellredir = "2>&1 | Out-File -Encoding UTF8 %s; if($?) {exit 0} else {exit 1}"
+    vim.opt.shellpipe = "2>&1 | Out-File -Encoding UTF8 %s; if($?) {exit 0} else {exit 1}"
+    vim.opt.shellquote = ""
+    vim.opt.shellxquote = ""
+end
+
 local augroup = vim.api.nvim_create_augroup
 local ThePrimeagenGroup = augroup('ThePrimeagen', {})
 
