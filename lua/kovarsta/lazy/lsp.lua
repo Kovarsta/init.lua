@@ -12,6 +12,7 @@ return {
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		"j-hui/fidget.nvim",
+		"rafamadriz/friendly-snippets",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 
@@ -32,6 +33,10 @@ return {
 				python = { "black" },
 				rust = { "rustfmt", lsp_format = "fallback" },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
+				typescript = { "prettierd", "prettier", stop_after_first = true },
+				json = { "prettierd", "prettier", stop_after_first = true },
+				javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
 			},
 			format_on_save = {
 				-- These options will be passed to conform.format()
@@ -47,6 +52,11 @@ return {
 			vim.lsp.protocol.make_client_capabilities(),
 			cmp_lsp.default_capabilities()
 		)
+		
+		local ls = require("luasnip")    
+		require("luasnip.loaders.from_vscode").lazy_load()
+		ls.filetype_extend("javascriptreact", { "html", "javascript" })
+		ls.filetype_extend("typescriptreact", { "html", "typescript" })
 
 		require("fidget").setup({})
 		require("mason").setup()
@@ -57,12 +67,11 @@ return {
 				"rust_analyzer",
 				"ts_ls",
 				"tailwindcss",
-				"lua_ls",
-				"ts_ls",
 				"pyright",
 				"cssls",
 				"clangd",
 				"emmet_ls",
+				"eslint",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
