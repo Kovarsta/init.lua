@@ -17,7 +17,7 @@ return {
         end)
 
 
-        vim.keymap.set("n", "<leader>zZ", function()
+        vim.keymap.set("n", "<leader>z", function()
             require("zen-mode").setup {
                 window = {
                     width = 80,
