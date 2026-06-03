@@ -40,7 +40,7 @@ return {
 			},
 			format_on_save = {
 				-- These options will be passed to conform.format()
-				timeout_ms = 2000,
+				timeout_ms = 10000,
 				lsp_format = "fallback",
 			},
 		})
@@ -72,6 +72,7 @@ return {
 				"clangd",
 				"emmet_ls",
 				"eslint",
+				"svelte",
 			},
 			handlers = {
 				function(server_name) -- default handler (optional)
