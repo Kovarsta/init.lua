@@ -32,6 +32,7 @@ return {
 				lua = { "stylua" },
 				python = { "black" },
 				rust = { "rustfmt", lsp_format = "fallback" },
+				svelte = { "prettierd", "prettier", stop_after_first = true },
 				javascript = { "prettierd", "prettier", stop_after_first = true },
 				typescript = { "prettierd", "prettier", stop_after_first = true },
 				json = { "prettierd", "prettier", stop_after_first = true },
@@ -57,6 +58,7 @@ return {
 		require("luasnip.loaders.from_vscode").lazy_load()
 		ls.filetype_extend("javascriptreact", { "html", "javascript" })
 		ls.filetype_extend("typescriptreact", { "html", "typescript" })
+		ls.filetype_extend("svelte", { "html", "javascript", "typescript" })
 
 		require("fidget").setup({})
 		require("mason").setup()
