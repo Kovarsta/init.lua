@@ -14,7 +14,11 @@ vim.opt.wrap = false
 
 vim.opt.swapfile = false
 vim.opt.backup = false
-vim.opt.undodir = vim.fn.stdpath("data") .. "/undodir"
+local undodir = vim.fn.stdpath("data") .. "/undodir"
+if vim.fn.isdirectory(undodir) == 0 then
+    vim.fn.mkdir(undodir, "p")
+end
+vim.opt.undodir = undodir
 vim.opt.undofile = true
 
 vim.opt.hlsearch = false
