@@ -100,16 +100,6 @@ return {
             end
 
             vim.keymap.set("n", "<leader>dr", function() toggle_debug_ui("repl") end, { desc = "Debug: toggle repl ui" })
-            vim.keymap.set("n", "<leader>ds", function() toggle_debug_ui("stacks") end,
-                { desc = "Debug: toggle stacks ui" })
-            vim.keymap.set("n", "<leader>dw", function() toggle_debug_ui("watches") end,
-                { desc = "Debug: toggle watches ui" })
-            vim.keymap.set("n", "<leader>db", function() toggle_debug_ui("breakpoints") end,
-                { desc = "Debug: toggle breakpoints ui" })
-            vim.keymap.set("n", "<leader>dS", function() toggle_debug_ui("scopes") end,
-                { desc = "Debug: toggle scopes ui" })
-            vim.keymap.set("n", "<leader>dc", function() toggle_debug_ui("console") end,
-                { desc = "Debug: toggle console ui" })
 			vim.keymap.set("n", "<leader>du", function() require("dapui").toggle() end, 
 				{ desc = "Debug: Toggle Full UI" })
 
