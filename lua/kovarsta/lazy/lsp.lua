@@ -19,6 +19,7 @@ return {
 	config = function()
 		require("mason-tool-installer").setup({
 			ensure_installed = {
+				"clang-format",
 				"black",
 				"debugpy",
 				"stylua",
@@ -27,24 +28,6 @@ return {
 			},
 		})
 
-		require("conform").setup({
-			formatters_by_ft = {
-				lua = { "stylua" },
-				python = { "black" },
-				rust = { "rustfmt", lsp_format = "fallback" },
-				svelte = { "prettierd", "prettier", stop_after_first = true },
-				javascript = { "prettierd", "prettier", stop_after_first = true },
-				typescript = { "prettierd", "prettier", stop_after_first = true },
-				json = { "prettierd", "prettier", stop_after_first = true },
-				javascriptreact = { "prettierd", "prettier", stop_after_first = true },
-				typescriptreact = { "prettierd", "prettier", stop_after_first = true },
-			},
-			format_on_save = {
-				-- These options will be passed to conform.format()
-				timeout_ms = 10000,
-				lsp_format = "fallback",
-			},
-		})
 		local cmp = require("cmp")
 		local cmp_lsp = require("cmp_nvim_lsp")
 		local capabilities = vim.tbl_deep_extend(
