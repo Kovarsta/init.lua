@@ -24,6 +24,7 @@ return {
 				"stylua",
 				"prettierd",
 				"prettier",
+				"yamlfmt",
 			},
 		})
 
