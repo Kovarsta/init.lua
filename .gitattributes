@@ -1,0 +1,3 @@
+# Keep multiplexer configs POSIX-friendly: tmux (WSL) rejects CRLF.
+.tmux.conf text eol=lf
+.psmux.conf text eol=lf
