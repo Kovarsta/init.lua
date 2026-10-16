@@ -35,8 +35,11 @@ vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz")
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz")
 
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
+-- NOTE: keep this off the <leader>x prefix. <leader>x is the Trouble
+-- diagnostics namespace (<leader>xx, <leader>xX, <leader>xL, <leader>xQ).
+-- A real <leader>x map makes Vim wait timeoutlen and can hijack <leader>xx.
 if vim.fn.has("win32") == 0 then
-    vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
+    vim.keymap.set("n", "<leader>cx", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Chmod +x current file" })
 end
 
 vim.keymap.set(
@@ -81,6 +84,23 @@ vim.keymap.set({ 'n', 'v', 'o' }, '<S-F2>', '$')
 -- Use Tab and Shift-Tab to indent in visual mode
 vim.keymap.set("v", "<Tab>", ">gv")
 vim.keymap.set("v", "<S-Tab>", "<gv")
+
+-- Insert mode: Tab accepts completion when the menu is open, otherwise
+-- indents. Shift-Tab outdents. Both are real keys (not tmux-bound) so they
+-- work inside tmux as long as extended-keys is on: see .tmux.conf / .psmux.conf.
+vim.keymap.set("i", "<Tab>", function()
+    if vim.fn.pumvisible() == 1 then
+        return "<C-n>"
+    end
+    return "<Tab>"
+end, { expr = true, desc = "Indent or next completion item" })
+
+vim.keymap.set("i", "<S-Tab>", function()
+    if vim.fn.pumvisible() == 1 then
+        return "<C-p>"
+    end
+    return "<C-d>"
+end, { expr = true, desc = "Outdent or previous completion item" })
 
 -- Rename variable
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = "[R]e[n]ame Variable" })
