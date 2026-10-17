@@ -2,13 +2,24 @@ return {
 	"stevearc/conform.nvim",
 	config = function()
 		require("conform").setup({
+			-- `.svelte` is formatted by the Svelte LSP (see formatters_by_ft).
+			-- That server can take minutes to warm up on large projects while it
+			-- loads the dependency graph, and format_on_save is synchronous, so
+			-- formatting it on save would freeze the editor. Format it after
+			-- save instead, which runs asynchronously and writes the result back.
+			-- Everything else keeps the synchronous path and the normal
+			-- "use LSP only if no formatter is configured" fallback.
 			format_on_save = function(bufnr)
-				-- `.svelte` needs prettier-plugin-svelte. The Svelte LSP runs the
-				-- project's own Prettier and also works when the project ships no
-				-- Prettier, so prefer it there. Everything else keeps the normal
-				-- "use LSP only if no formatter is configured" fallback.
-				local lsp_format = vim.bo[bufnr].filetype == "svelte" and "prefer" or "fallback"
-				return { timeout_ms = 10000, lsp_format = lsp_format }
+				if vim.bo[bufnr].filetype == "svelte" then
+					return nil
+				end
+				return { timeout_ms = 10000, lsp_format = "fallback" }
+			end,
+			format_after_save = function(bufnr)
+				if vim.bo[bufnr].filetype ~= "svelte" then
+					return nil
+				end
+				return { timeout_ms = 10000, lsp_format = "prefer" }
 			end,
 			formatters_by_ft = {
 				c = { "clang-format" },
